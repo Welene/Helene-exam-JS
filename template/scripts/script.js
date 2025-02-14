@@ -1,3 +1,6 @@
+import { displayMovieCard } from '../utils/domUtils.js';
+// HER ANROPER JEG FUNKSJONENE, DET ER FRA MAIN.JS/SCRIPT.JS AT ALT KJØRES
+
 
 if(window.location.pathname === '/' || window.location.pathname === '/index.html') {
     console.log('index.html');
