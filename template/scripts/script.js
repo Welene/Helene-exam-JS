@@ -1,5 +1,7 @@
 // import { displayMovieCard } from '../utils/domUtils.js';
-import { fetchMovies } from "./modules/api.js";
+import { searchFunction } from './utils/domUtils.js';
+
+
 // HER ANROPER JEG FUNKSJONENE, DET ER FRA MAIN.JS/SCRIPT.JS AT ALT KJØRES
 console.log('test');
 
@@ -17,4 +19,4 @@ if(window.location.pathname === '/' || window.location.pathname === '/template/i
 
 }
 
-fetchMovies();
+searchFunction(); // anroper searchFunction, som anroper fetchMovies inni seg, så den anroper begge da, NÅR MAN TRYKKER på search altså så kjører funksjonen som er i domUtils.js

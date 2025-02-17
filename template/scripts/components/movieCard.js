@@ -1,8 +1,6 @@
-// ikke fått noen API key enda, sjekk at det fungerer når jeg evt får den
 
-// FLYTT DENNE TIL ANDRE MAPPER DER JEG TRENGER Å IMPORTERE "createMovieCard" FUNKSJONEN
+// FLYTT DENNE TIL ANDRE MAPPER DER JEG TRENGER Å IMPORTERE "createMovieCard" FUNKSJONEN, altså imporere den i andre mapper
 // import { createMovieCard } from '../utils/domUtils.js';
-
 // import { displayMovieCard } from '../utils/domUtils.js';
 
 // export function createMovieCard(movie) {
