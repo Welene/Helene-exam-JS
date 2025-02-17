@@ -7,6 +7,12 @@ export function renderTrailers(movie, num) {
 
     const trailerList = document.querySelectorAll(`.trailers__video`);
     const trailerArray = Array.from(trailerList);
+
+    // -----------------------------------------
+    for (let i = 0; i < 5; i++) {
+        renderTrailers(movie, num); // nå anropes funksjonen 5 ganger, men jeg trenger et unikt id eller nummer for hver randome film elns, se på dette mer senere
+    }
+    // -----------------------------------------
     
     document.querySelectorAll(`.trailers__arrow`).forEach(arrow => {
         arrow.addEventListener(`click`, (event) => {

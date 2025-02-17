@@ -1,5 +1,6 @@
 // import { displayMovieCard } from '../utils/domUtils.js';
 import { searchFunction } from './utils/domUtils.js';
+// import { renderTrailers } from './modules/caroussel.js';
 
 
 // HER ANROPER JEG FUNKSJONENE, DET ER FRA MAIN.JS/SCRIPT.JS AT ALT KJØRES
@@ -20,3 +21,5 @@ if(window.location.pathname === '/' || window.location.pathname === '/template/i
 }
 
 searchFunction(); // anroper searchFunction, som anroper fetchMovies inni seg, så den anroper begge da, NÅR MAN TRYKKER på search altså så kjører funksjonen som er i domUtils.js
+
+// renderTrailers(movie, num);
