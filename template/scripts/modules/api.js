@@ -22,19 +22,11 @@ export async function fetchMovies(userInput) {
 export async function fetchTrailers() {
     const response = await fetch ('https://santosnr6.github.io/Data/favoritemovies.json');
     let allTrailers = await response.json();
-    // return allTrailers; 
 
-    if (allTrailers) {
-        let randomTrailers = allTrailers.sort(() => Math.random() - 0.5).slice(0, 5);
-        return randomTrailers;
-    } else {
-        console.error("Ingen trailere her lol");
-        return [];
-    }
+    let randomTrailers = allTrailers.sort(() => Math.random() - 0.5).slice(0, 5); 
+    console.log(randomTrailers);
+    return randomTrailers;
 }
-
-
-// getFetchTrailers();
 
 
 // *** FLERE MODULER TIL SLUTT, MINST 2:
