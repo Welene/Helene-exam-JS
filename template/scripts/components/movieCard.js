@@ -3,7 +3,7 @@
 // import { createMovieCard } from '../utils/domUtils.js';
 // import { displayMovieCard } from '../utils/domUtils.js';
 
-// export function createMovieCard(movie) {
+// export function createMovieCard(movie) { // til info-siden om filmer/ index siden med mange små filer, ikke trailere
 //     let card = document.createElement('article');
 //     card.classList.add('card-container__movie'); // artikkelen har klassen "card-container__movie", utenfor har vi en section som heter "card-container" i HTML
 //     card.textContent = // innholdet i artikkelen (card) er;
