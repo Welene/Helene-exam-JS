@@ -82,3 +82,19 @@ body {
     border: none;
     cursor: pointer;
 }
+
+
+/* MIN EGEN STYLING HER */
+
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr ;
+    grid-template-rows: 1fr;
+}
+
+.li-container {
+    height: 3rem;
+    width: 5rem;
+    background-color: red;
+    z-index: 999;
+}
