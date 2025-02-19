@@ -37,16 +37,16 @@ searchFunction(); // anroper searchFunction, som anroper fetchMovies inni seg, s
 
 
 export async function getFetchTrailers() {
-    const randomTrailers = await fetchTrailers(); 
-    console.log(randomTrailers);
+    try {
+        const allTrailers = await fetchTrailers(); // henter alle trailers som finnes i API-et
+        let randomTrailers = allTrailers.sort(() => Math.random() - 0.5).slice(0, 5);  // sorterer og velger ut 5 randome trailere, fra 0-5 index, ignorerer den siste AKA nr.5
 
-    // Sjekk om randomTrailers er en array
-    if (Array.isArray(randomTrailers) && randomTrailers.length > 0) {
-        randomTrailers.forEach((movie, index) => {
-            renderTrailers(movie, index + 1); 
+        randomTrailers.forEach((movie, index) => { // for hver film... forEach = går gjennom hver index
+            renderTrailers(movie, index + 1); // viser filmen på skjermen (renderTrailers-funksjonen) + 1 viser en ny film, en ny index (fungerer også om man går tilbake fordi vi bruker pop, unshift, shirt og push i den andre funksjonen (changeTrailer pi script.js))
         });
-    } else {
-        console.error("Ingen trailere tilgjengelig.");
+    } catch (error) {
+        console.error("Noe er mektig galt her for å si det sånn...", error);
     }
 }
+
 getFetchTrailers();

@@ -16,25 +16,6 @@ export function renderTrailers(movie, num) {
     })
 }
 
-
-async function getFetchTrailers() {
-    const allTrailers = await fetchTrailers();
-    console.log(allTrailers); // er det trailere her at all??
-
-    if (allTrailers.Search) {
-        let randomTrailers = allTrailers.Search.sort(() => Math.random() - 0.5).slice(0, 5);
-        randomTrailers.forEach((movie, index) => {
-            renderTrailers(movie, index + 1);
-        });
-    } else {
-        console.error("Ingen trailere her lol");
-    }
-}
-
-getFetchTrailers();
-
-
-
 function changeTrailer(event, trailerList, trailerArray) {
     if (event.target.dataset.direction === `right`) {
         trailerArray.push(trailerArray.shift());
