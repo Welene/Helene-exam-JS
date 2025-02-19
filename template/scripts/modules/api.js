@@ -1,5 +1,7 @@
 // import oData from '../data/data.js';
 import { searchFunction } from "../utils/domUtils.js";
+import { getFetchTrailers } from "../script.js";
+import { renderTrailers } from "./caroussel.js";
 
 // export async function fetchTopMovies() {
 //     const response = await fetch('https://santosnr6.github.io/Data/favoritemovies.json');
@@ -15,6 +17,24 @@ export async function fetchMovies(userInput) {
 // HENTER ALLE FILMER, når man søker, broad search, her er userInput = verdien på input feltet AKA det som skrives inn i det
 
 
+
+
+export async function fetchTrailers() {
+    const response = await fetch ('https://santosnr6.github.io/Data/favoritemovies.json');
+    let allTrailers = await response.json();
+    // return allTrailers; 
+
+    if (allTrailers) {
+        let randomTrailers = allTrailers.sort(() => Math.random() - 0.5).slice(0, 5);
+        return randomTrailers;
+    } else {
+        console.error("Ingen trailere her lol");
+        return [];
+    }
+}
+
+
+// getFetchTrailers();
 
 
 // *** FLERE MODULER TIL SLUTT, MINST 2:
