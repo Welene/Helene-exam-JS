@@ -2,6 +2,16 @@
 import { searchFunction } from './utils/domUtils.js';
 import { fetchTrailers } from './modules/api.js';
 import { renderTrailers } from './modules/caroussel.js';
+
+import { fetchTopMovies } from './modules/api.js';
+
+import { createMovieCard } from './components/movieCard.js';
+import { displayMovieCard } from './utils/domUtils.js';
+import { oData } from './data/data.js';
+// import { displayMovieCard } from './utils/domUtils.js';
+
+
+
 // import { renderTrailers } from './modules/caroussel.js';
 
 
@@ -24,18 +34,8 @@ if(window.location.pathname === '/' || window.location.pathname === '/template/i
 
 searchFunction(); // anroper searchFunction, som anroper fetchMovies inni seg, så den anroper begge da, NÅR MAN TRYKKER på search altså så kjører funksjonen som er i domUtils.js
 
-// renderTrailers(movie, num);
 
-
-
-// export async function getFetchTrailers() {
-//     let randomTrailers = fetchTrailers();
-//     randomTrailers.forEach((movie, index) => {
-//         renderTrailers(movie, index + 1);
-//     });
-// }
-
-
+// denne passer tydeligvis å ha her i script.js
 export async function getFetchTrailers() {
     try {
         const allTrailers = await fetchTrailers(); // henter alle trailers som finnes i API-et
@@ -50,3 +50,28 @@ export async function getFetchTrailers() {
 }
 
 getFetchTrailers();
+
+// createMovieCard();
+
+
+// NÅ BLE JEG PLUTSELIG FORVIRRET:
+// jeg vil: 
+// 
+// 1) anrope en funksjon i script.js, som gjør at de andre funksjonene i domUtils.js (displayMovieCard) og createMovieCard (movieCard.js) + fetchTopMovies (api.js) i SCRIPT.JS til slutt
+// 2) importere funksjonene til de rette mappene, der de relevante funksjonene trenger det, litt usikker på hva som trengs hvor
+// 3) ha en forEach movie loop som lager en variabnel for card = createMovieCard(movie) + displayMovieCard(); under? en anonym funksjon - se mer på dette 
+// 4) skrive createMovieCard funksjonen 
+// 5)
+
+async function displayMovies() {
+    await fetchTopMovies();  // Henter filmer fra API-et og lagrer dem i oData.topMovieList
+    const movies = oData.topMovieList;  // Få tilgang til listen med filmer
+
+    // For hver film, lager et kort og viser det
+    movies.forEach(movie => {
+        const card = createMovieCard(movie);  
+        displayMovieCard(card);  
+    });
+}
+
+displayMovies();

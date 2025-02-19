@@ -1,4 +1,8 @@
 import { fetchMovies } from "../modules/api.js";
+// import { createMovieCard } from "../components/movieCard.js"; trenger jeg den her, pga "card"?
+
+// import { fetchTopMovies } from './modules/api.js';
+// import { createMovieCard } from './components/movieCard.js';
 
 export function searchFunction() {
     let searchBtn = document.getElementById('searchBtn');
@@ -46,7 +50,8 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
 
         let searchResults = document.getElementById('searchResults'); // henter searchResults fra html --> FINNES IKKE ENDA
         if (!searchResults) { // om det ikke finnes --> (som det ikke gjør enda) --> skaper den:
-            searchResults = document.createElement('ul'); // en ul-liste!
+            searchResults = document.createElement('div');
+            searchResults.classList.add('li-container'); // en ul-liste!
             searchResults.id = 'searchResults'; // og legger til id: searchResults som vi prøvde/prøver å hente fra html, fordi nå finnes den faktisk
             searchInput.parentElement.insertBefore(searchResults, searchInput.nextSibling); //setter searchResult (ul) rett etter input-feltet i html 
         } // denne ul-en har vi som en boks som kan lagre li-elementene med filmer inni der
@@ -70,7 +75,16 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
 // denne funksjonen skal vel anropes i searchFunction, regner jeg med.
 
 
-// export function displayMovieCard (card) { // sender inn card som parameter til denne funksjonen som trenger den
-//     let cardContainer = document.getElementById('card-container'); // henter movie-container AKA seksjonen som artikkelen ("card") ligger inni
-//     cardContainer.appendChild(card); // legger vår nye artikkel som vi lagde i "createMovieCard" inni HTML seksjonen "movie-container"
+// export function displayMovieCard (card) { 
+//     let cardContainer = document.getElementById('card-container'); 
+//     cardContainer.appendChild(card); 
 // }
+
+
+
+export function displayMovieCard(card) { // sender inn card som parameter til denne funksjonen som trenger den
+    let movieContainer = document.getElementById('cardContainer'); // henter movie-container AKA seksjonen som artikkelen ("card") ligger inni
+
+    movieContainer.appendChild(card); // legger vår nye artikkel som vi lagde i "createMovieCard" inni HTML seksjonen "movie-container"
+    // ****SKRIV EN DISPLAY MOVIE CARD FUNKSJON HER SOM VISER KORTENE, DENNE ER ALLEREDE IMPORTERT I SCRIPT.JS FILEN (kommentert ut)**
+}
