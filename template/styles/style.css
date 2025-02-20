@@ -72,12 +72,17 @@ body {
     width: 5rem;
     border: none;
     cursor: pointer;
+    font-family: Montserrat;
+    font-weight: 600;
+    background-color: #F5C518;
 }
 
 .header__fav-btn {
     text-decoration: none;
     font-size: 1.5rem;
     color: var(--text-yellow);
+    font-family: Montserrat;
+    font-weight: bold;
     background: none;
     border: none;
     cursor: pointer;
@@ -87,10 +92,24 @@ body {
 /* MIN EGEN STYLING HER */
 
 .card-container {
+    margin-top: 7rem;
     display: grid;
-    grid-template-columns: 1fr ;
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    gap: 4rem;
+    text-align: center;
 }
+
+
+.popular-title {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-family: Montserrat;
+}
+/* legg en klasse på film-p-taggen i js, sånn at den skal styles, den er der men seres ikke, fordi det er svart skrift */
+
+/* legge til en src dynamisk på alle film-bilder, sånn at når man trykker på det, så blir det et mer spesifikt (=i) søk og man havner på movie-info siden om den spesifikke filmen */
 
 .li-container {
     height: 3rem;

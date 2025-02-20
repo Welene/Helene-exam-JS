@@ -53,8 +53,13 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
             searchResults = document.createElement('div');
             searchResults.classList.add('li-container'); // en ul-liste!
             searchResults.id = 'searchResults'; // og legger til id: searchResults som vi prøvde/prøver å hente fra html, fordi nå finnes den faktisk
-            searchInput.parentElement.insertBefore(searchResults, searchInput.nextSibling); //setter searchResult (ul) rett etter input-feltet i html 
-        } // denne ul-en har vi som en boks som kan lagre li-elementene med filmer inni der
+            
+            searchInput.parentElement.insertBefore(searchResults, searchInput.nextSibling); 
+            // **FORELDRENE (parentElement) SKAL TIL BUTIKKEN Å HANDLE (handling = .insertBefore), MEN KAN IKKE GJØRE DET FØR DE HAR FETCHET UNGENE (searchResults & searchInput.nextSibling)
+            // FORDI UNGENE (AKA --> (searchResults, searchInput.nextSibling) KLARER SEG IKKE UTEN FORELDRENE --> DERMED FÅR IKKE FORELDRENE (butikken AKA .insertBefore) HANDLET UTEN UNGENE. 
+            // På denne måten gir det mening at man leser denne raden i denne rekkefølgen: 1) searchInput.parentElement, 2) (searchResults, searchInput.nextSibling);, 3) .insertBefore
+            // i stedet for å bare lese den direkte fra venstre til høyre (som man tydeligvis ikke gjør her). 
+        } 
 
         searchResults.textContent = '';  // tømmer listen om det finnes noe der fra før av...
 
