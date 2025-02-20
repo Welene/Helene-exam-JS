@@ -51,18 +51,6 @@ export async function getFetchTrailers() {
 
 getFetchTrailers();
 
-// createMovieCard();
-
-
-// NÅ BLE JEG PLUTSELIG FORVIRRET:
-// jeg vil: 
-// 
-// 1) anrope en funksjon i script.js, som gjør at de andre funksjonene i domUtils.js (displayMovieCard) og createMovieCard (movieCard.js) + fetchTopMovies (api.js) i SCRIPT.JS til slutt
-// 2) importere funksjonene til de rette mappene, der de relevante funksjonene trenger det, litt usikker på hva som trengs hvor
-// 3) ha en forEach movie loop som lager en variabnel for card = createMovieCard(movie) + displayMovieCard(); under? en anonym funksjon - se mer på dette 
-// 4) skrive createMovieCard funksjonen 
-// 5)
-
 async function displayMovies() {
     await fetchTopMovies();  // Henter filmer fra API-et og lagrer dem i oData.topMovieList
     const movies = oData.topMovieList;  // Få tilgang til listen med filmer
