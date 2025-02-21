@@ -34,7 +34,6 @@ export function searchFunction() {
     }
 }
 
-// ****SE PÅ DENNE, DEN FUNKER IKKE HELT -- LAGER IKKE LI ELEMENT SOM ØNSKET****
 export function searchList() { // lager en ny funksjon som skal håndtere direkte input av user
     let searchInput = document.getElementById('searchInput'); // henter searchInput-feltet fra html
     searchInput.addEventListener('input', async () => { // lytter til et bruker INPUT på siden 
@@ -44,16 +43,14 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
         let allMovies = await fetchMovies(userInput); // Henter filmer fra userInput
         console.log(allMovies); // skriver ut filmen man søker på i konsollen, ut fra userInput, vises i en array-liste/objekt
 
-        // console.log(movies);
         let searchSuggestions = movies.filter(movie => movie.Title.toLowerCase().includes(userInput));
         // searchSuggestions (det som dukker opp i li-elementer) // filtrerer movies som inkluderer userInput (etter tittelen)
 
         let searchResults = document.getElementById('searchResults'); // henter searchResults fra html --> FINNES IKKE ENDA
         if (!searchResults) { // om det ikke finnes --> (som det ikke gjør enda) --> skaper den:
             searchResults = document.createElement('div');
-            searchResults.classList.add('li-container'); // en ul-liste!
+            searchResults.classList.add('li-container'); 
             searchResults.id = 'searchResults'; // og legger til id: searchResults som vi prøvde/prøver å hente fra html, fordi nå finnes den faktisk
-            
             searchInput.parentElement.insertBefore(searchResults, searchInput.nextSibling); 
             // **FORELDRENE (parentElement) SKAL TIL BUTIKKEN Å HANDLE (handling = .insertBefore), MEN KAN IKKE GJØRE DET FØR DE HAR FETCHET UNGENE (searchResults & searchInput.nextSibling)
             // FORDI UNGENE (AKA --> (searchResults, searchInput.nextSibling) KLARER SEG IKKE UTEN FORELDRENE --> DERMED FÅR IKKE FORELDRENE (butikken AKA .insertBefore) HANDLET UTEN UNGENE. 
@@ -73,7 +70,7 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
         console.log(searchSuggestions); // logger ut forslagene som er i hvert li-element under input-feltet
     });
 }
-
+// drop-down?
 
 // *** Å GJØRE -- NEXT ***
 // lage en funksjon som legger til li-elementer når man søker, max 10 filmer skal vises samtidig i en liste:
