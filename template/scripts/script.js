@@ -56,7 +56,7 @@ async function displayMovies() {
     const movies = oData.topMovieList;  // Få tilgang til listen med filmer
 
     // For hver film, lager et kort og viser det
-    movies.forEach(movie => {
+    movies.slice(0, 15).forEach(movie => {
         const card = createMovieCard(movie);  
         displayMovieCard(card);  
     });
