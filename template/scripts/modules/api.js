@@ -10,7 +10,7 @@ export async function fetchTopMovies() {
 }
 
 export async function fetchMovies(userInput) {
-    const response = await fetch (`http://www.omdbapi.com/?s=${userInput}&apikey=9155565`);
+    const response = await fetch (`http://www.omdbapi.com/?s=${userInput}&type=movie&apikey=9155565`); // legger til type film, fordi den hentet spill også
     let allMovies = await response.json();
     return allMovies;
 }

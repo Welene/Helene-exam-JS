@@ -69,17 +69,30 @@ async function displayTopMovies() {
 displayTopMovies();
 
 
-
 async function displaySearchMovies() {
-    if (window.location.pathname === '/template/search.html') {
-        await fetchMovies();  // Henter filmer fra API-et og lagrer dem i oData.topMovieList
-        const movies = oData.topMovieList;  // Få tilgang til listen med filmer
-        // For hver film, lager et kort og viser det
-        movies.slice(0, 15).forEach(movie => {
-        const card = createMovieCard(movie);  
-        displayMovieCard(card);  
-        });
-    }  
+    if (window.location.pathname === '/template/search.html') { // sjekker om vi er på SEARCH siden i stedet for;
+
+        const queryString = window.location.search; // i stedet for å bruke new URLSearchParams (til objekt, om man har flere parametrer) (..)
+        // (...)jeg har bare ett "userInput" og da kan vi bare skrive sånn her
+        const userInput = queryString.split('=')[1]; // vi kutter URL-en og henter bare teksten etter = [1] alt etter =... 
+        // [0] f.eks hadde hentet alt FØR = tegnet. Vi vil ha alt etter =, AKA [1].
+
+        if (userInput) { // sjekker om vi ahr et userInput, om vi har det så;
+            let allMovies = await fetchMovies(userInput); // venter vi på svar fra fetchMovies(userInput), AKA det du har søkt etter
+            console.log('Filmer hentet for søket:', allMovies);
+
+            if (allMovies.Response === "True" && allMovies.Search) { // om søket er godkjent og får en respons 
+                // og .Search = om det finnes filmer som er relatert til userInput
+                allMovies.Search.slice(0, 9).forEach(movie => { // da går den gjennom alle filmer i arrayen med alt som er relevant til userInput
+                    const card = createMovieCard(movie); // lager et movieCard sånn at disse relevante filmene kan vises på skjermen
+                    displayMovieCard(card); // og vi viser dem faktisk ved å anrope displayMovieCard funksjonen.
+                });
+            } else {
+                console.log('Disse filmene ser du på skjermen', allMovies); // logger ut alle filmene som dukker opp relatert til userInput
+            }
+        }
+    }
 }
 
-displaySearchMovies;
+displaySearchMovies(); // husker å anrope displaySearchMovies funksjonen som jeg akkurat skrev ovenfor, ellers funker det jo ikke...
+
