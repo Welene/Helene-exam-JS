@@ -10,13 +10,19 @@ export async function fetchTopMovies() {
 }
 
 export async function fetchMovies(userInput) {
-    const response = await fetch (`http://www.omdbapi.com/?s=${userInput}&apikey=9155565`);
+    const response = await fetch (`http://www.omdbapi.com/?s=${userInput}&type=movie&apikey=9155565`); // legger til type film, fordi den hentet spill også
     let allMovies = await response.json();
     return allMovies;
 }
+
+export async function fetchSpesificMovieDetails(inputImdbID){
+    const response = await fetch (`http://www.omdbapi.com/?i=${inputImdbID}&apikey=9155565`);
+    let spesificMovie = await response.json();
+    return spesificMovie;
+}
 // HENTER ALLE FILMER, når man søker, broad search, her er userInput = verdien på input feltet AKA det som skrives inn i det
 
-
+// ALLE API ANROP SKAL VÆRE AV TRY CATCH BLOKK!!!
 
 export async function fetchTrailers() {
     const response = await fetch ('https://santosnr6.github.io/Data/favoritemovies.json');

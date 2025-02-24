@@ -1,4 +1,5 @@
 import { fetchMovies } from "../modules/api.js";
+import { fetchSpesificMovieDetails } from '../modules/api.js';
 // import { createMovieCard } from "../components/movieCard.js"; trenger jeg den her, pga "card"?
 
 // import { fetchTopMovies } from './modules/api.js';
@@ -20,7 +21,7 @@ export function searchFunction() {
                     
                     let allMovies = await fetchMovies(userInput); // må hente allMovies inn til denne funksjonen, await = venter på fetchMovies, før man kan logge den ut vvv
                     console.log(allMovies); // Skriver ut objektet man søker på i konsollen
-                    // window.location.href = `search.html?userInput=${encodeURIComponent(userInput)}`; // *** BYTTER TIL MOVIE-INFO SIDE*** etter man har trykt på search
+                    window.location.href = `search.html?userInput=${encodeURIComponent(userInput)}`; // *** BYTTER TIL MOVIE-INFO SIDE*** etter man har trykt på search
                     // når jeg er på ny side så er det errors, kan ikke lese (null) --> fiks neste gang
                     return;
                 } else {
@@ -33,6 +34,7 @@ export function searchFunction() {
         });
     }
 }
+
 
 export function searchList() { // lager en ny funksjon som skal håndtere direkte input av user
     let searchInput = document.getElementById('searchInput'); // henter searchInput-feltet fra html
@@ -84,9 +86,22 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
 
 
 
-export function displayMovieCard(card) { // sender inn card som parameter til denne funksjonen som trenger den
-    let movieContainer = document.getElementById('cardContainer'); // henter movie-container AKA seksjonen som artikkelen ("card") ligger inni
+export function displayMovieCard(card) {  // viser opp kort slik som de skal vises på index siden === top movies
+    let movieContainer = document.getElementById('cardContainer') || document.getElementById('cardContainerSearch'); 
 
-    movieContainer.appendChild(card); // legger vår nye artikkel som vi lagde i "createMovieCard" inni HTML seksjonen "movie-container"
-    // ****SKRIV EN DISPLAY MOVIE CARD FUNKSJON HER SOM VISER KORTENE, DENNE ER ALLEREDE IMPORTERT I SCRIPT.JS FILEN (kommentert ut)**
+    if (movieContainer) {
+        movieContainer.appendChild(card);
+    } else {
+        console.error("Fant ingen container for filmkort!");
+    }
 }
+
+
+
+
+// sjekk om html side = skriv ut fetchTopMovies
+// sjekk om search side = skriv ut fetchSpesificMovieDetails
+// endre fetchMovies til fetchSpesificMovieDetails i searchInput funksjonen der oppe etterpå?
+
+// endre navn på cardContainer til cardContainerSearch igjen i search.html
+
