@@ -15,14 +15,14 @@ export async function fetchMovies(userInput) {
     return allMovies;
 }
 
-export async function fetchSpesificMovieDetails(ImdbID){
-    const response = await fetch (`http://www.omdbapi.com/?i=${ImdbID}&apikey=9155565`);
+export async function fetchSpesificMovieDetails(inputImdbID){
+    const response = await fetch (`http://www.omdbapi.com/?i=${inputImdbID}&apikey=9155565`);
     let spesificMovie = await response.json();
     return spesificMovie;
 }
 // HENTER ALLE FILMER, når man søker, broad search, her er userInput = verdien på input feltet AKA det som skrives inn i det
 
-
+// ALLE API ANROP SKAL VÆRE AV TRY CATCH BLOKK!!!
 
 export async function fetchTrailers() {
     const response = await fetch ('https://santosnr6.github.io/Data/favoritemovies.json');

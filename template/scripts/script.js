@@ -4,6 +4,7 @@ import { fetchTrailers } from './modules/api.js';
 import { renderTrailers } from './modules/caroussel.js';
 
 import { fetchTopMovies } from './modules/api.js';
+import { fetchMovies } from './modules/api.js';
 
 import { createMovieCard } from './components/movieCard.js';
 import { displayMovieCard } from './utils/domUtils.js';
@@ -53,15 +54,32 @@ export async function getFetchTrailers() {
 
 getFetchTrailers();
 
-async function displayMovies() {
-    await fetchTopMovies();  // Henter filmer fra API-et og lagrer dem i oData.topMovieList
-    const movies = oData.topMovieList;  // Få tilgang til listen med filmer
-
-    // For hver film, lager et kort og viser det
-    movies.slice(0, 15).forEach(movie => {
+async function displayTopMovies() {
+    if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
+        await fetchTopMovies();  // Henter filmer fra API-et og lagrer dem i oData.topMovieList
+        const movies = oData.topMovieList;  // Få tilgang til listen med filmer
+        // For hver film, lager et kort og viser det
+        movies.slice(0, 15).forEach(movie => {
         const card = createMovieCard(movie);  
         displayMovieCard(card);  
-    });
+        });
+    }  
 }
 
-displayMovies();
+displayTopMovies();
+
+
+
+async function displaySearchMovies() {
+    if (window.location.pathname === '/template/search.html') {
+        await fetchMovies();  // Henter filmer fra API-et og lagrer dem i oData.topMovieList
+        const movies = oData.topMovieList;  // Få tilgang til listen med filmer
+        // For hver film, lager et kort og viser det
+        movies.slice(0, 15).forEach(movie => {
+        const card = createMovieCard(movie);  
+        displayMovieCard(card);  
+        });
+    }  
+}
+
+displaySearchMovies;
