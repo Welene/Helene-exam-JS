@@ -14,6 +14,12 @@ export async function fetchMovies(userInput) {
     let allMovies = await response.json();
     return allMovies;
 }
+
+export async function fetchSpesificMovieDetails(ImdbID){
+    const response = await fetch (`http://www.omdbapi.com/?i=${ImdbID}&apikey=9155565`);
+    let spesificMovie = await response.json();
+    return spesificMovie;
+}
 // HENTER ALLE FILMER, når man søker, broad search, her er userInput = verdien på input feltet AKA det som skrives inn i det
 
 

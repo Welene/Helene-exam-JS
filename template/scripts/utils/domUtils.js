@@ -20,7 +20,7 @@ export function searchFunction() {
                     
                     let allMovies = await fetchMovies(userInput); // må hente allMovies inn til denne funksjonen, await = venter på fetchMovies, før man kan logge den ut vvv
                     console.log(allMovies); // Skriver ut objektet man søker på i konsollen
-                    // window.location.href = `search.html?userInput=${encodeURIComponent(userInput)}`; // *** BYTTER TIL MOVIE-INFO SIDE*** etter man har trykt på search
+                    window.location.href = `search.html?userInput=${encodeURIComponent(userInput)}`; // *** BYTTER TIL MOVIE-INFO SIDE*** etter man har trykt på search
                     // når jeg er på ny side så er det errors, kan ikke lese (null) --> fiks neste gang
                     return;
                 } else {
