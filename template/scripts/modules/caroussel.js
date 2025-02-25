@@ -1,4 +1,3 @@
-import { fetchTrailers } from './api.js'
 
 export function renderTrailers(movie, num) {
     const iFrameRef = document.createElement(`iframe`);
@@ -15,6 +14,7 @@ export function renderTrailers(movie, num) {
         });
     })
 }
+
 
 function changeTrailer(event, trailerList, trailerArray) {
     if (event.target.dataset.direction === `right`) {

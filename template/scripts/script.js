@@ -10,17 +10,9 @@ import { createMovieCard } from './components/movieCard.js';
 import { displayMovieCard } from './utils/domUtils.js';
 import { oData } from './data/data.js';
 import { displayDetailedCard } from './utils/domUtils.js';
-// import { displayMovieCard } from './utils/domUtils.js';
 
 
-
-// import { renderTrailers } from './modules/caroussel.js';
-
-
-// HER ANROPER JEG FUNKSJONENE, DET ER FRA MAIN.JS/SCRIPT.JS AT ALT KJØRES
-console.log('test');
-
-if(window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
+if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
     console.log('index.html');
 
 } else if(window.location.pathname === '/template/favorites.html') {
@@ -53,7 +45,9 @@ export async function getFetchTrailers() {
     }
 } 
 
+
 getFetchTrailers();
+
 
 async function displayTopMovies() {
     if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
@@ -66,6 +60,7 @@ async function displayTopMovies() {
         });
     }  
 }
+
 
 displayTopMovies();
 
@@ -94,6 +89,7 @@ export async function displaySearchMovies() {
         }
     }
 }
+
 
 displaySearchMovies(); // husker å anrope displaySearchMovies funksjonen som jeg akkurat skrev ovenfor, ellers funker det jo ikke...
 

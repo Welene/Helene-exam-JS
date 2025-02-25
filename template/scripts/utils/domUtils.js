@@ -2,6 +2,7 @@ import { fetchMovies } from "../modules/api.js";
 import { fetchSpecificMovieDetails } from '../modules/api.js';
 import { createDetailedCard } from "../components/movieCard.js";
 
+
 export function searchFunction() {
     let searchBtn = document.getElementById('searchBtn');
     let searchInput = document.getElementById('searchInput');
@@ -64,10 +65,6 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
 }
 // drop-down?
 
-// *** Å GJØRE -- NEXT ***
-// lage en funksjon som legger til li-elementer når man søker, max 10 filmer skal vises samtidig i en liste:
-// denne funksjonen skal vel anropes i searchFunction, regner jeg med
-
 
 export function displayMovieCard(card) {  // viser opp kort slik som de skal vises på index siden === top movies
     let movieContainer = document.getElementById('cardContainer') || document.getElementById('cardContainerSearch'); 
@@ -92,6 +89,7 @@ export async function displayDetailedCard () {
             let movieInfoSection = document.querySelector('.movie-information'); // movie-info seksjonen som allerede finnes i html
             
             if (movieInfoSection) {
+                console.log('detailedCard.outerHTML:', detailedCard.outerHTML); // detailedCard ER TYDELIGVIS UNDEFINED, DETTE MÅ ALTSÅ VÆRE HOVEDPROBLEMET --> SKJERMEN ER TOM
                 movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);// SCREW APPENDCHILD!!!?
             }
         }

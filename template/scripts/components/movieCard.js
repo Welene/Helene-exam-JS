@@ -2,6 +2,7 @@ import { displayMovieCard } from '../utils/domUtils.js';
 import { displayDetailedCard } from '../utils/domUtils.js';
 import { fetchSpecificMovieDetails } from '../modules/api.js';
 
+
 window.onload = async function() {
     const imdbID = new URLSearchParams(window.location.search).get('i');
 
@@ -33,9 +34,11 @@ window.onload = async function() {
             sessionStorage.setItem('movieDetails', JSON.stringify(movieDetails));
             window.location.href = `/template/movie.html?i=${movie.imdbID}`;
         });
+
         displayMovieCard(card); 
         return card;
     }
+
 
 export async function createDetailedCard (movie) {
     let detailedCard = document.createElement('article');
@@ -44,8 +47,10 @@ export async function createDetailedCard (movie) {
         `<img src='${movie.Poster}' alt='${movie.Title}' class='detailed-img'>
         <h2 class="detailed-title">${movie.Title}</h2>
         <p class='detailed-info'>${movie.Title}</p>`;
+    console.log('detailedCard AKA the article with all movie info content:', detailedCard); // LOGGER UT ARTIKKELEN, DER INFO SKAL LIGGE - MEN LIKEVEL ER DEN UNDEFINED I domUtils??? // logger x2 for some reason
     return detailedCard;  
 } 
+
 
 export function toggleFavorite() {
 // HER LEGGER JEG TIL ET TOMT OG ET FYLT STJERNEIKON SOM JEG KAN TOGGLE AV OG PÅ I BILDET,
