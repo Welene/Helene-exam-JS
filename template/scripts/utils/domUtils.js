@@ -1,5 +1,6 @@
 import { fetchMovies } from "../modules/api.js";
-import { fetchSpesificMovieDetails } from '../modules/api.js';
+import { fetchSpecificMovieDetails } from '../modules/api.js';
+import { createDetailedCard } from "../components/movieCard.js";
 // import { createMovieCard } from "../components/movieCard.js"; trenger jeg den her, pga "card"?
 
 // import { fetchTopMovies } from './modules/api.js';
@@ -76,14 +77,7 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
 
 // *** Å GJØRE -- NEXT ***
 // lage en funksjon som legger til li-elementer når man søker, max 10 filmer skal vises samtidig i en liste:
-// denne funksjonen skal vel anropes i searchFunction, regner jeg med.
-
-
-// export function displayMovieCard (card) { 
-//     let cardContainer = document.getElementById('card-container'); 
-//     cardContainer.appendChild(card); 
-// }
-
+// denne funksjonen skal vel anropes i searchFunction, regner jeg med
 
 
 export function displayMovieCard(card) {  // viser opp kort slik som de skal vises på index siden === top movies
@@ -92,16 +86,34 @@ export function displayMovieCard(card) {  // viser opp kort slik som de skal vis
     if (movieContainer) {
         movieContainer.appendChild(card);
     } else {
-        console.error("Fant ingen container for filmkort!");
+        console.error("ingen artikkel for filmkort her");
     }
 }
 
 
+export async function displayDetailedCard() {
+    if (window.location.pathname === '/template/movie.html') {
+        let queryString = window.location.search;
+        let imdbID = queryString.split('=')[1];
 
+        if (imdbID) {
+            let movieDetails = await fetchSpecificMovieDetails(imdbID);
+            let detailedCard = createDetailedCard(movieDetails); // Lag det detaljerte kortet
 
-// sjekk om html side = skriv ut fetchTopMovies
-// sjekk om search side = skriv ut fetchSpesificMovieDetails
-// endre fetchMovies til fetchSpesificMovieDetails i searchInput funksjonen der oppe etterpå?
+            console.log("detailedCard in displayDetailedCard:", detailedCard);  // Logg før appendering
 
-// endre navn på cardContainer til cardContainerSearch igjen i search.html
+            let movieInfoSection = document.querySelector('.movie-information');
+
+            // Sjekk om detailedCard faktisk er et Node (DOM-element)
+            if (movieInfoSection && detailedCard instanceof Node) {
+                console.log("Appending detailedCard to movieInfoSection");
+                movieInfoSection.appendChild(detailedCard);  // Appender kortet
+            } else {
+                console.error('Noe gikk galt: movieInfoSection eller detailedCard er ugyldig!');
+                console.error('movieInfoSection:', movieInfoSection);
+                console.error('detailedCard:', detailedCard);
+            }
+        }
+    }
+}
 

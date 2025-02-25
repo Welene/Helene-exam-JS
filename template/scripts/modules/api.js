@@ -14,12 +14,12 @@ export async function fetchMovies(userInput) {
     let allMovies = await response.json();
     return allMovies;
 }
-
-export async function fetchSpesificMovieDetails(inputImdbID){
-    const response = await fetch (`http://www.omdbapi.com/?i=${inputImdbID}&apikey=9155565`);
-    let spesificMovie = await response.json();
+export async function fetchSpecificMovieDetails(imdbID) {
+    const response = await fetch(`http://www.omdbapi.com/?apikey=9155565&plot=full&i=${imdbID}`);
+    const spesificMovie = await response.json();
     return spesificMovie;
 }
+
 // HENTER ALLE FILMER, når man søker, broad search, her er userInput = verdien på input feltet AKA det som skrives inn i det
 
 // ALLE API ANROP SKAL VÆRE AV TRY CATCH BLOKK!!!

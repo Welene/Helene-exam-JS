@@ -1,18 +1,52 @@
 import { displayMovieCard } from '../utils/domUtils.js';
-// FLYTT DENNE TIL ANDRE MAPPER DER J}EG TRENGER Å IMPORTERE "createMovieCard" FUNKSJONEN, altså imporere den i andre mapper
-// import { createMovieCard } from '../utils/domUtils.js';
+import { displayDetailedCard } from '../utils/domUtils.js';
+import { fetchSpecificMovieDetails } from '../modules/api.js';
+
+window.onload = async function() {
+    const imdbID = new URLSearchParams(window.location.search).get('i');
+
+    if (imdbID) {
+        // Hent movieDetails fra sessionStorage
+        const movieDetails = JSON.parse(sessionStorage.getItem('movieDetails'));
+
+        if (movieDetails) {
+            let detailedCard = createDetailedCard(movieDetails);
+            const movieInfoSection = document.querySelector('.movie-information');
+            if (movieInfoSection) {
+                movieInfoSection.appendChild(detailedCard);
+            }
+        }
+    }
+};
 
 
-export function createMovieCard(movie) { // til info-siden om filmer/ index siden med mange små filer, ikke trailere
+export function createMovieCard(movie) { 
     let card = document.createElement('article');
-    card.classList.add('card-container__movie'); // artikkelen har klassen "card-container__movie", utenfor har vi en section som heter "card-container" i HTML
-    card.innerHTML = // innholdet i artikkelen (card) er; // textContent fungerer ikke, gjør elementer til strenger -- innerHTML gjør at det tolkes som elementer og vises på siden
-        `<img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
-        <p class='movie-title'>${movie.Title}</p>`;
-
-    displayMovieCard(card); // når man sender card inn som parameter i en annen funksjon for å få tilgang til den der også, så må man huske å anrope den inni funksjonen her også
-    return card; // fikser mange problemer, må visst returnere card sånn at alle de andre funksjonene får tilgang til den, selv om jeg har eksportert hele funksjonen men ok
+    card.classList.add('card-container__movie'); 
+    card.innerHTML = `
+        <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
+        <p class='movie-title'>${movie.Title}</p>
+    `;
+    card.addEventListener('click', async () => {
+        const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
+        sessionStorage.setItem('movieDetails', JSON.stringify(movieDetails));
+        window.location.href = `/template/movie.html?i=${movie.imdbID}`;
+    });
+    displayMovieCard(card); 
+    return card;
 }
+
+export async function createDetailedCard (movie) {
+    let detailedCard = document.createElement('article');
+    detailedCard.classList.add('movie-information__card'); // artikkelen har klassen "card-container__movie", utenfor har vi en section som heter "card-container" i HTML
+    detailedCard.innerHTML = // innholdet i artikkelen (card) er; // textContent fungerer ikke, gjør elementer til strenger -- innerHTML gjør at det tolkes som elementer og vises på siden
+        `<img src='${movie.Poster}' alt='${movie.Title}' class='detailed-img'>
+        <h2 class="detailed-title">${movie.Title}</h2>
+        <p class='detailed-info'>${movie.Title}</p>`;
+    displayDetailedCard(detailedCard); // når man sender card inn som parameter i en annen funksjon for å få tilgang til den der også, så må man huske å anrope den inni funksjonen her også
+    console.log("detailedCard created 128367981273912739712398723", detailedCard);
+    return detailedCard;  
+} 
 
 export function toggleFavorite() {
 // HER LEGGER JEG TIL ET TOMT OG ET FYLT STJERNEIKON SOM JEG KAN TOGGLE AV OG PÅ I BILDET,
@@ -21,6 +55,7 @@ export function toggleFavorite() {
 // STYLING/PLASSERING AV STJERNE-IKONET PÅ BILDET GJØR JEG I CSS SENERE.
 
 }
+
 
 
 
