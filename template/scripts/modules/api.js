@@ -15,10 +15,17 @@ export async function fetchMovies(userInput) {
     return allMovies;
 }
 export async function fetchSpecificMovieDetails(imdbID) {
-    const response = await fetch(`http://www.omdbapi.com/?apikey=9155565&plot=full&i=${imdbID}`);
-    const spesificMovie = await response.json();
-    return spesificMovie;
+    try {
+        let response = await fetch(`http://www.omdbapi.com/?apikey=9155565&plot=full&i=${imdbID}`);
+        let data = await response.json();
+        console.log('fetchSpecificMovieDetails data:', data);  // Legg til denne loggen for å sjekke hva som returneres
+        return data;
+    } catch (error) {
+        console.error('Feil i fetchSpecificMovieDetails:', error);
+        return null;
+    }
 }
+
 
 // HENTER ALLE FILMER, når man søker, broad search, her er userInput = verdien på input feltet AKA det som skrives inn i det
 

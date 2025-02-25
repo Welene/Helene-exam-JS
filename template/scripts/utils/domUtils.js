@@ -1,10 +1,6 @@
 import { fetchMovies } from "../modules/api.js";
 import { fetchSpecificMovieDetails } from '../modules/api.js';
 import { createDetailedCard } from "../components/movieCard.js";
-// import { createMovieCard } from "../components/movieCard.js"; trenger jeg den her, pga "card"?
-
-// import { fetchTopMovies } from './modules/api.js';
-// import { createMovieCard } from './components/movieCard.js';
 
 export function searchFunction() {
     let searchBtn = document.getElementById('searchBtn');
@@ -17,9 +13,7 @@ export function searchFunction() {
 
             try {
                 if (userInput) {
-                    
                     // fetchMovies(userInput); // om det finnes et userInput (verdi), og trykker på searchBtn ('click') etter å ha skrevet inn en verdi, så dukker filmen/objektet opp i konsollen 
-                    
                     let allMovies = await fetchMovies(userInput); // må hente allMovies inn til denne funksjonen, await = venter på fetchMovies, før man kan logge den ut vvv
                     console.log(allMovies); // Skriver ut objektet man søker på i konsollen
                     window.location.href = `search.html?userInput=${encodeURIComponent(userInput)}`; // *** BYTTER TIL MOVIE-INFO SIDE*** etter man har trykt på search
@@ -28,7 +22,6 @@ export function searchFunction() {
                 } else {
                     throw new Error('Du må skrive inn en film'); // ellers får man feilmelding, men denne må man legge til en p-tagg for at den skal vises
                 }
-                
             } catch (error) {
                 console.log(error.message); // her ser vi feilmeldingen ovenfor bare at den havner i konsollen, siden jeg ikke har laget et dynamisk p-tag i js enda for den ^
             }
@@ -41,11 +34,8 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
     let searchInput = document.getElementById('searchInput'); // henter searchInput-feltet fra html
     searchInput.addEventListener('input', async () => { // lytter til et bruker INPUT på siden 
         let userInput = searchInput.value.toLowerCase(); // gjør at det ikke er forskjell på CAPS og små bokstaver
-
-
         let allMovies = await fetchMovies(userInput); // Henter filmer fra userInput
         console.log(allMovies); // skriver ut filmen man søker på i konsollen, ut fra userInput, vises i en array-liste/objekt
-
         let searchSuggestions = movies.filter(movie => movie.Title.toLowerCase().includes(userInput));
         // searchSuggestions (det som dukker opp i li-elementer) // filtrerer movies som inkluderer userInput (etter tittelen)
 
@@ -62,7 +52,6 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
         } 
 
         searchResults.textContent = '';  // tømmer listen om det finnes noe der fra før av...
-
         searchSuggestions.slice(0, 10).forEach(movie => { // viser bare 10 filmer med hjelp av slice
             let suggestionText = document.createElement('li'); // lager et listeelement (suggestionText) for hver film den itererer igjennom, denne variabelen inkluderer userInput, se rad 44 (..) 
             // (..) --> sånn at det man søker etter dukker opp, om det finnes relevante søk til det.
@@ -91,27 +80,19 @@ export function displayMovieCard(card) {  // viser opp kort slik som de skal vis
 }
 
 
-export async function displayDetailedCard() {
-    if (window.location.pathname === '/template/movie.html') {
-        let queryString = window.location.search;
-        let imdbID = queryString.split('=')[1];
+export async function displayDetailedCard () {
+    if (window.location.pathname === '/template/movie.html') { // om vi er på movie info siden;
+        let queryString = window.location.search; // i stedet for å bruke new URLSearchParams (til objekt, om man har flere parametrer) (..)
+        // (...)jeg har bare ett "userInput" og da kan vi bare skrive sånn her
+        let imdbID = queryString.split('=')[1]; // henter alt bare etter "=" i URL-en
 
-        if (imdbID) {
-            let movieDetails = await fetchSpecificMovieDetails(imdbID);
-            let detailedCard = createDetailedCard(movieDetails); // Lag det detaljerte kortet
-
-            console.log("detailedCard in displayDetailedCard:", detailedCard);  // Logg før appendering
-
-            let movieInfoSection = document.querySelector('.movie-information');
-
-            // Sjekk om detailedCard faktisk er et Node (DOM-element)
-            if (movieInfoSection && detailedCard instanceof Node) {
-                console.log("Appending detailedCard to movieInfoSection");
-                movieInfoSection.appendChild(detailedCard);  // Appender kortet
-            } else {
-                console.error('Noe gikk galt: movieInfoSection eller detailedCard er ugyldig!');
-                console.error('movieInfoSection:', movieInfoSection);
-                console.error('detailedCard:', detailedCard);
+        if (imdbID) { // om ID-et finnes
+            let movieDetails = await fetchSpecificMovieDetails(imdbID); // vent på API-et som fetcher details om den filmen basert på ID-et du trykte på
+            let detailedCard = createDetailedCard(movieDetails); // henter movieDetails fra arrayen som har alle detaljer om filmen allerede i API-et
+            let movieInfoSection = document.querySelector('.movie-information'); // movie-info seksjonen som allerede finnes i html
+            
+            if (movieInfoSection) {
+                movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);// SCREW APPENDCHILD!!!?
             }
         }
     }

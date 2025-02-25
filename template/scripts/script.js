@@ -9,6 +9,7 @@ import { fetchMovies } from './modules/api.js';
 import { createMovieCard } from './components/movieCard.js';
 import { displayMovieCard } from './utils/domUtils.js';
 import { oData } from './data/data.js';
+import { displayDetailedCard } from './utils/domUtils.js';
 // import { displayMovieCard } from './utils/domUtils.js';
 
 
@@ -99,3 +100,4 @@ displaySearchMovies(); // husker å anrope displaySearchMovies funksjonen som je
 
 // DELE OPP TING SENERE SÅNN AT SCRIPT.JS BARE ANROPER OG IKKE LAGER SELVE FUNKSJONENE
 
+displayDetailedCard();

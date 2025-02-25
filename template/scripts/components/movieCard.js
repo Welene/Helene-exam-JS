@@ -13,28 +13,29 @@ window.onload = async function() {
             let detailedCard = createDetailedCard(movieDetails);
             const movieInfoSection = document.querySelector('.movie-information');
             if (movieInfoSection) {
-                movieInfoSection.appendChild(detailedCard);
+                movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);
+
             }
         }
     }
 };
 
 
-export function createMovieCard(movie) { 
-    let card = document.createElement('article');
-    card.classList.add('card-container__movie'); 
-    card.innerHTML = `
-        <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
-        <p class='movie-title'>${movie.Title}</p>
-    `;
-    card.addEventListener('click', async () => {
-        const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
-        sessionStorage.setItem('movieDetails', JSON.stringify(movieDetails));
-        window.location.href = `/template/movie.html?i=${movie.imdbID}`;
-    });
-    displayMovieCard(card); 
-    return card;
-}
+    export function createMovieCard(movie) { 
+        let card = document.createElement('article');
+        card.classList.add('card-container__movie'); 
+        card.innerHTML = `
+            <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
+            <p class='movie-title'>${movie.Title}</p>
+        `;
+        card.addEventListener('click', async () => {
+            const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
+            sessionStorage.setItem('movieDetails', JSON.stringify(movieDetails));
+            window.location.href = `/template/movie.html?i=${movie.imdbID}`;
+        });
+        displayMovieCard(card); 
+        return card;
+    }
 
 export async function createDetailedCard (movie) {
     let detailedCard = document.createElement('article');
@@ -43,8 +44,6 @@ export async function createDetailedCard (movie) {
         `<img src='${movie.Poster}' alt='${movie.Title}' class='detailed-img'>
         <h2 class="detailed-title">${movie.Title}</h2>
         <p class='detailed-info'>${movie.Title}</p>`;
-    displayDetailedCard(detailedCard); // når man sender card inn som parameter i en annen funksjon for å få tilgang til den der også, så må man huske å anrope den inni funksjonen her også
-    console.log("detailedCard created 128367981273912739712398723", detailedCard);
     return detailedCard;  
 } 
 
