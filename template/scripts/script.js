@@ -9,17 +9,10 @@ import { fetchMovies } from './modules/api.js';
 import { createMovieCard } from './components/movieCard.js';
 import { displayMovieCard } from './utils/domUtils.js';
 import { oData } from './data/data.js';
-// import { displayMovieCard } from './utils/domUtils.js';
+import { displayDetailedCard } from './utils/domUtils.js';
 
 
-
-// import { renderTrailers } from './modules/caroussel.js';
-
-
-// HER ANROPER JEG FUNKSJONENE, DET ER FRA MAIN.JS/SCRIPT.JS AT ALT KJØRES
-console.log('test');
-
-if(window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
+if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
     console.log('index.html');
 
 } else if(window.location.pathname === '/template/favorites.html') {
@@ -52,7 +45,9 @@ export async function getFetchTrailers() {
     }
 } 
 
+
 getFetchTrailers();
+
 
 async function displayTopMovies() {
     if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
@@ -66,13 +61,14 @@ async function displayTopMovies() {
     }  
 }
 
+
 displayTopMovies();
 
 
-async function displaySearchMovies() {
+export async function displaySearchMovies() {
     if (window.location.pathname === '/template/search.html') { // sjekker om vi er på SEARCH siden i stedet for;
 
-        const queryString = window.location.search; // i stedet for å bruke new URLSearchParams (til objekt, om man har flere parametrer) (..)
+        let queryString = window.location.search; // i stedet for å bruke new URLSearchParams (til objekt, om man har flere parametrer) (..)
         // (...)jeg har bare ett "userInput" og da kan vi bare skrive sånn her
         const userInput = queryString.split('=')[1]; // vi kutter URL-en og henter bare teksten etter = [1] alt etter =... 
         // [0] f.eks hadde hentet alt FØR = tegnet. Vi vil ha alt etter =, AKA [1].
@@ -94,5 +90,10 @@ async function displaySearchMovies() {
     }
 }
 
+
 displaySearchMovies(); // husker å anrope displaySearchMovies funksjonen som jeg akkurat skrev ovenfor, ellers funker det jo ikke...
 
+
+// DELE OPP TING SENERE SÅNN AT SCRIPT.JS BARE ANROPER OG IKKE LAGER SELVE FUNKSJONENE
+
+displayDetailedCard();

@@ -141,3 +141,18 @@ body {
     border-radius: .5rem;
     box-shadow: 0px 0px 15px 2px rgb(201, 201, 201);
 }
+
+
+
+
+
+
+.movie-information {
+    border: 1px solid #ddd;  /* Legg til en grense rundt kortet for å gjøre det synlig */
+    padding: 5rem;
+    margin: 4rem;
+    height: 10rem;
+    width: 15rem;
+}
+
+
