@@ -7,7 +7,6 @@ window.onload = async function() {
     const imdbID = new URLSearchParams(window.location.search).get('i');
 
     if (imdbID) {
-        // Hent movieDetails fra sessionStorage
         const movieDetails = JSON.parse(sessionStorage.getItem('movieDetails'));
 
         if (movieDetails) {
@@ -15,7 +14,6 @@ window.onload = async function() {
             const movieInfoSection = document.querySelector('.movie-information');
             if (movieInfoSection) {
                 movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);
-
             }
         }
     }
@@ -27,14 +25,12 @@ window.onload = async function() {
         card.classList.add('card-container__movie'); 
         card.innerHTML = `
             <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
-            <p class='movie-title'>${movie.Title}</p>
-        `;
+            <p class='movie-title'>${movie.Title}</p>`;
         card.addEventListener('click', async () => {
             const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
             sessionStorage.setItem('movieDetails', JSON.stringify(movieDetails));
             window.location.href = `/template/movie.html?i=${movie.imdbID}`;
         });
-
         displayMovieCard(card); 
         return card;
     }
