@@ -32,7 +32,7 @@ searchFunction(); // anroper searchFunction, som anroper fetchMovies inni seg, s
 // denne passer tydeligvis å ha her i script.js
 export async function getFetchTrailers() {
     try {
-        if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') { // om jeg ikke er på index.html, får jeg ikke errorMsg av at trailere ikke vises, de skal ikke vises på search siden
+        if (window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') { // om jeg ikke er på index.html, får jeg ikke errorMsg av at trailere ikke vises, de skal ikke vises på search siden
             const allTrailers = await fetchTrailers();
             let randomTrailers = allTrailers.sort(() => Math.random() - 0.5).slice(0, 5); 
 
@@ -50,7 +50,7 @@ getFetchTrailers();
 
 
 async function displayTopMovies() {
-    if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
+    if (window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') {
         await fetchTopMovies();  // Henter filmer fra API-et og lagrer dem i oData.topMovieList
         const movies = oData.topMovieList;  // Få tilgang til listen med filmer
         // For hver film, lager et kort og viser det
