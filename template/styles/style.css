@@ -151,10 +151,13 @@ body {
     border: 1px solid #ddd;  /* Legg til en grense rundt kortet for å gjøre det synlig */
     padding: 5rem;
     margin: 4rem;
-    height: 10rem;
-    width: 15rem;
+    min-height: 10rem;
+    min-width: 15rem;
 }
 
+.movie-information__card {
+    color: white;
+}
 
 @media (max-width: 768px) {
     

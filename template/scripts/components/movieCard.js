@@ -10,9 +10,10 @@ window.onload = async function() {
         const movieDetails = JSON.parse(localStorage.getItem('movieDetails'));
 
         if (movieDetails) {
-            let detailedCard = createDetailedCard(movieDetails);
+            // let detailedCard = await createDetailedCard(movieDetails);
             const movieInfoSection = document.querySelector('.movie-information');
             if (movieInfoSection) {
+                console.log('detailedCard.outerHTML:', detailedCard.outerHTML)
                 movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);
             }
         }
@@ -20,20 +21,20 @@ window.onload = async function() {
 };
 
 
-    export function createMovieCard(movie) { 
-        let card = document.createElement('article');
-        card.classList.add('card-container__movie'); 
-        card.innerHTML = `
-            <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
-            <p class='movie-title'>${movie.Title}</p>`;
-        card.addEventListener('click', async () => {
-            const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
-            localStorage.setItem('movieDetails', JSON.stringify(movieDetails));
-            window.location.href = `/template/movie.html?i=${movie.imdbID}`;
-        });
-        displayMovieCard(card); 
-        return card;
-    }
+export function createMovieCard(movie) { 
+    let card = document.createElement('article');
+    card.classList.add('card-container__movie'); 
+    card.innerHTML = `
+        <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
+        <p class='movie-title'>${movie.Title}</p>`;
+    card.addEventListener('click', async () => {
+        const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
+        localStorage.setItem('movieDetails', JSON.stringify(movieDetails));
+        window.location.href = `/template/movie.html?i=${movie.imdbID}`; 
+    });
+    displayMovieCard(card); 
+    return card;
+}
 
 
 export async function createDetailedCard (movie) {
