@@ -96,3 +96,31 @@ export async function displayDetailedCard () {
     }
 }
 
+export async function favoriteToggle(params) {
+    let favoriteBtn = document.createElement('button');
+    favoriteBtn.textContent = '⭐';
+    favoriteBtn.classList.add('favorite-btn');
+    favoriteBtn.addEventListener('click', () => toggleFavorite());
+}
+
+// 1) OPPDATERE textContent med tom/fylt stjerne etter hvert klikk
+// 2) LAGRE filmen i LocalStorage om den er en favoritt (textContent === gul stjerne)
+// 3) TA BORT filmen fra localStorage om filmen ikke er favoritt lengre? (textContent === ufylt stjerne)
+
+// 4) STYLE ellre bruke D-NONE til toggling?
+// 5) BOOLEAN for å sjekke om stjernen er TRUE eller FALSE elns
+
+
+// HUSK Å IMPORTERE / SJEKK OM DET TRENGS AWAIT osv...
+
+export function addToFavorites () {
+ // 'click' på tom stjerne --> blir gul stjerne (anrop favoriteToggle funksjon) 
+ // legger film til favorittsiden
+}
+
+export function removeFromFavorites () {
+    // 'click' på fylt stjerne --> blir tom stjerne (anrop favoriteToggle funksjon)
+    // tar film bort fra favorittside
+}
+
+// må kanskje ha en displayFavoriteCard funksjon, om jeg bruker displayCard funksjonen så blir det kanskje bare rot?

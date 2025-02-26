@@ -49,14 +49,3 @@ export async function createDetailedCard (movie) {
 } 
 
 
-export function toggleFavorite() {
-// HER LEGGER JEG TIL ET TOMT OG ET FYLT STJERNEIKON SOM JEG KAN TOGGLE AV OG PÅ I BILDET,
-// DE HAVNER INN OG UT AV FAVORITES.HTML/SIDEN NÅR MAN TOGGLER. 
-
-// STYLING/PLASSERING AV STJERNE-IKONET PÅ BILDET GJØR JEG I CSS SENERE.
-
-}
-
-
-
-
