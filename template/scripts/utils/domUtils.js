@@ -85,7 +85,7 @@ export async function displayDetailedCard () {
 
         if (imdbID) { // om ID-et finnes
             let movieDetails = await fetchSpecificMovieDetails(imdbID); // vent på API-et som fetcher details om den filmen basert på ID-et du trykte på
-            let detailedCard = createDetailedCard(movieDetails); // henter movieDetails fra arrayen som har alle detaljer om filmen allerede i API-et
+            let detailedCard = await createDetailedCard(movieDetails); // henter movieDetails fra arrayen som har alle detaljer om filmen allerede i API-et
             let movieInfoSection = document.querySelector('.movie-information'); // movie-info seksjonen som allerede finnes i html
             
             if (movieInfoSection) {
