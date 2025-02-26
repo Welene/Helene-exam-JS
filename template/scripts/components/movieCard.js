@@ -3,21 +3,21 @@ import { displayDetailedCard } from '../utils/domUtils.js';
 import { fetchSpecificMovieDetails } from '../modules/api.js';
 
 
-// window.onload = async function() {
-//     const imdbID = new URLSearchParams(window.location.search).get('i');
+window.onload = async function() {
+    const imdbID = new URLSearchParams(window.location.search).get('i');
 
-//     if (imdbID) {
-//         const movieDetails = JSON.parse(sessionStorage.getItem('movieDetails'));
+    if (imdbID) {
+        const movieDetails = JSON.parse(localStorage.getItem('movieDetails'));
 
-//         if (movieDetails) {
-//             let detailedCard = createDetailedCard(movieDetails);
-//             const movieInfoSection = document.querySelector('.movie-information');
-//             if (movieInfoSection) {
-//                 movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);
-//             }
-//         }
-//     }
-// };
+        if (movieDetails) {
+            let detailedCard = createDetailedCard(movieDetails);
+            const movieInfoSection = document.querySelector('.movie-information');
+            if (movieInfoSection) {
+                movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);
+            }
+        }
+    }
+};
 
 
     export function createMovieCard(movie) { 
@@ -26,11 +26,11 @@ import { fetchSpecificMovieDetails } from '../modules/api.js';
         card.innerHTML = `
             <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
             <p class='movie-title'>${movie.Title}</p>`;
-        // card.addEventListener('click', async () => {
-        //     const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
-        //     sessionStorage.setItem('movieDetails', JSON.stringify(movieDetails));
-        //     window.location.href = `/template/movie.html?i=${movie.imdbID}`;
-        // });
+        card.addEventListener('click', async () => {
+            const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
+            localStorage.setItem('movieDetails', JSON.stringify(movieDetails));
+            window.location.href = `/template/movie.html?i=${movie.imdbID}`;
+        });
         displayMovieCard(card); 
         return card;
     }
