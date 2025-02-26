@@ -28,7 +28,7 @@ export function createMovieCard(movie) {
         <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
         <p class='movie-title'>${movie.Title}</p>`;
     card.addEventListener('click', async () => {
-        const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
+        const movieDetails = await fetchSpecificMovieDetails(movie.imdbID); // plot kommer ikke med, er title x2
         localStorage.setItem('movieDetails', JSON.stringify(movieDetails));
         window.location.href = `/template/movie.html?i=${movie.imdbID}`; 
     });
@@ -43,7 +43,7 @@ export async function createDetailedCard (movie) {
     detailedCard.innerHTML = // innholdet i artikkelen (card) er; // textContent fungerer ikke, gjør elementer til strenger -- innerHTML gjør at det tolkes som elementer og vises på siden
         `<img src='${movie.Poster}' alt='${movie.Title}' class='detailed-img'>
         <h2 class="detailed-title">${movie.Title}</h2>
-        <p class='detailed-info'>${movie.Title}</p>`;
+        <p class='detailed-info'>${movie.Plot}</p>`;
     console.log('detailedCard AKA the article with all movie info content:', detailedCard); // LOGGER UT ARTIKKELEN, DER INFO SKAL LIGGE - MEN LIKEVEL ER DEN UNDEFINED I domUtils??? // logger x2 for some reason
     return detailedCard;  
 } 
