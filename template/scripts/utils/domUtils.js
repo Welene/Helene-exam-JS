@@ -2,7 +2,6 @@ import { fetchMovies } from "../modules/api.js";
 import { fetchSpecificMovieDetails } from '../modules/api.js';
 import { createDetailedCard } from "../components/movieCard.js";
 
-
 export function searchFunction() {
     let searchBtn = document.getElementById('searchBtn');
     let searchInput = document.getElementById('searchInput');
@@ -96,12 +95,47 @@ export async function displayDetailedCard () {
     }
 }
 
-export async function favoriteToggle(params) {
-    let favoriteBtn = document.createElement('button');
-    favoriteBtn.textContent = '⭐';
-    favoriteBtn.classList.add('favorite-btn');
-    favoriteBtn.addEventListener('click', () => toggleFavorite());
+
+let favoriteMovies = [];
+
+export async function favoriteToggle(movieId) {
+    let images = document.querySelectorAll('.movie-img');
+
+    images.forEach((movieImg) => { // For hvert bildeelement så;
+        if (!movieImg.querySelector('.favorite-btn')) { // Sjekk om knappen allerede finnes // ellers blir det 14 knapper i hvert bilde når det finnes 14 bilder på siden...
+            let favoriteBtn = document.createElement('button');
+            favoriteBtn.classList.add('favorite-btn');
+            favoriteBtn.textContent = '☆'; // som er tom til å begynne med / ikke favoritt-markert
+
+            favoriteBtn.addEventListener('click', (event) => {
+                event.preventDefault(); // unngår at siden refresher når man trykker på knappen, fordi favoriteBtn er jo en knapp
+
+                // Bytt ikon
+                if (favoriteBtn.textContent === '☆') { // stjernen er tom først
+                    favoriteBtn.textContent = '⭐'; // om man klikker så blir den gul
+                } else {
+                    favoriteBtn.textContent = '☆';  // om den er gul allerede så blir den tom igjen??????????????????????????????????????????????????? usikkerok hmm
+                }
+
+                let index = favoriteMovies.indexOf(movieId);
+                if (index === -1) { // Hvis filmen IKKE er i arrayen, da er indexen til filmen -1, og da går den videre og pusher inn den i arrayen vvv
+                    favoriteMovies.push(movieId); // legger til filmens unike ID (altså spesifikk film du trykker på) i localStorage, bare med hjelp av Id
+                } else {
+                    favoriteMovies.splice(index, 1); // tar bort filmen som favoritt fra arrayen i localStorage, om indexen er 0 eller større
+                }
+
+                // Oppdater localStorage
+                localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
+            });
+            console.log('Bilder funnet på siden:', images.length); // logger ut alle bilder den finner, det funker
+            movieImg.appendChild(favoriteBtn); // movieImg (variabelnavn/sendes som parameter der oppe) // appenChild(favoriteBtn) === barn = btn (setter inni forelderen === movieImg er forelder)
+        }
+    });
 }
+
+//anrope / getItem'favoriteMovies' senere i en annen mappe, når jeg er på favoritt.html siden
+
+
 
 // 1) OPPDATERE textContent med tom/fylt stjerne etter hvert klikk
 // 2) LAGRE filmen i LocalStorage om den er en favoritt (textContent === gul stjerne)
@@ -124,3 +158,4 @@ export function removeFromFavorites () {
 }
 
 // må kanskje ha en displayFavoriteCard funksjon, om jeg bruker displayCard funksjonen så blir det kanskje bare rot?
+// SJEKK HVA AIZO SYNTES OM PLANENE MINE.

@@ -197,7 +197,15 @@ body {
     letter-spacing: .5px;
 }
 
-
+.favorite-btn {
+    /* background-color: transparent; */
+    border: none;
+    color: red;
+    font-size: 5rem;
+    cursor: pointer;
+    z-index: 999;
+    position: relative;
+}
 
 
 @media (max-width: 768px) {
