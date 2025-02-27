@@ -109,6 +109,7 @@ export async function favoriteToggle(movieId) {
 
             favoriteBtn.addEventListener('click', (event) => {
                 event.preventDefault(); // unngår at siden refresher når man trykker på knappen, fordi favoriteBtn er jo en knapp
+                event.stopPropagation(); // når man trykker på stjernen, så bytter den ikke side -- SOMEHOW
 
                 // Bytt ikon
                 if (favoriteBtn.textContent === '☆') { // stjernen er tom først
