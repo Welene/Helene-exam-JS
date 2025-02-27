@@ -3,6 +3,8 @@ import { displayDetailedCard } from '../utils/domUtils.js';
 import { fetchSpecificMovieDetails } from '../modules/api.js';
 import { favoriteToggle } from '../utils/domUtils.js';
 
+import { displayFavoriteMovies } from '../utils/domUtils.js';
+
 
 // window.onload = async function() {
 //     const imdbID = new URLSearchParams(window.location.search).get('i');

@@ -1,5 +1,7 @@
 import { oData } from '../data/data.js';
 
+import { displayMovieCard } from '../utils/domUtils.js';
+
 
 export async function fetchTopMovies() {
     const response = await fetch('https://santosnr6.github.io/Data/favoritemovies.json');
@@ -24,6 +26,19 @@ export async function fetchSpecificMovieDetails(imdbID) {
         console.error('Noe er feil...', error);
         return null;
     }
+}
+
+export async function favoriteMoviesInfo(imdbID) {
+    try {
+        let response = await fetch(`http://www.omdbapi.com/?apikey=9155565&plot=full&i=${imdbID}`);
+        let data = await response.json();
+        console.log('imdbID movie API info:', data);  
+        return data;
+    } catch (error) {
+        console.error('Noe er feil...', error);
+        return null;
+    }
+    
 }
 
 // ALLE API ANROP SKAL VÆRE AV TRY CATCH BLOKK!!!

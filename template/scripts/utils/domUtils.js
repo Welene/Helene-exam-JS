@@ -2,7 +2,9 @@ import { fetchMovies } from "../modules/api.js";
 import { fetchSpecificMovieDetails } from '../modules/api.js';
 import { createDetailedCard } from "../components/movieCard.js";
 
-export function searchFunction() {
+import { createMovieCard } from "../components/movieCard.js";
+
+export async function searchFunction() {
     let searchBtn = document.getElementById('searchBtn');
     let searchInput = document.getElementById('searchInput');
 
@@ -30,7 +32,7 @@ export function searchFunction() {
 }
 
 
-export function searchList() { // lager en ny funksjon som skal håndtere direkte input av user
+export async function searchList() { // lager en ny funksjon som skal håndtere direkte input av user
     let searchInput = document.getElementById('searchInput'); // henter searchInput-feltet fra html
     searchInput.addEventListener('input', async () => { // lytter til et bruker INPUT på siden 
         let userInput = searchInput.value.toLowerCase(); // gjør at det ikke er forskjell på CAPS og små bokstaver
@@ -65,8 +67,8 @@ export function searchList() { // lager en ny funksjon som skal håndtere direkt
 // drop-down?
 
 
-export function displayMovieCard(card) {  // viser opp kort slik som de skal vises på index siden === top movies
-    let movieContainer = document.getElementById('cardContainer') || document.getElementById('cardContainerSearch'); 
+export async function displayMovieCard(card) {  // viser opp kort slik som de skal vises på index siden === top movies
+    let movieContainer = document.getElementById('cardContainer') || document.getElementById('cardContainerSearch') || document.getElementById('cardContainerFav'); 
 
     if (movieContainer) {
         movieContainer.appendChild(card);
@@ -105,17 +107,21 @@ export async function favoriteToggle(movieId) {
         if (!movieImg.querySelector('.favorite-btn')) { // Sjekk om knappen allerede finnes // ellers blir det 14 knapper i hvert bilde når det finnes 14 bilder på siden...
             let favoriteBtn = document.createElement('button');
             favoriteBtn.classList.add('favorite-btn');
-            favoriteBtn.textContent = '☆'; // som er tom til å begynne med / ikke favoritt-markert
+            // favoriteBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=87&format=png&color=000000" alt="Tom stjerne">';// som er tom til å begynne med / ikke favoritt-markert
+            favoriteBtn.textContent = '☆';
 
             favoriteBtn.addEventListener('click', (event) => {
                 event.preventDefault(); // unngår at siden refresher når man trykker på knappen, fordi favoriteBtn er jo en knapp
                 event.stopPropagation(); // når man trykker på stjernen, så bytter den ikke side -- SOMEHOW
 
                 // Bytt ikon
-                if (favoriteBtn.textContent === '☆') { // stjernen er tom først
-                    favoriteBtn.textContent = '⭐'; // om man klikker så blir den gul
+                if (favoriteBtn.textContent==='☆') { // stjernen er tom først, INKLUDERER alt teksten for å sjekke om det er samme som tom stjerne-ikonet
+                    // if (favoriteBtn.innerHTML.includes('Tom stjerne')) { // trengs bare med innerHTML animert ikon...
+                    // favoriteBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=lFyaayFdhpED&format=png&color=000000" alt="Fylt stjerne">'; // om man klikker så blir den gul
+                    favoriteBtn.textContent = '★';
                 } else {
-                    favoriteBtn.textContent = '☆';  // om den er gul allerede så blir den tom igjen??????????????????????????????????????????????????? usikkerok hmm
+                    // favoriteBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=87&format=png&color=000000" alt="Tom stjerne">'  // om den er gul allerede så blir den tom igjen??????????????????????????????????????????????????? usikkerok hmm
+                    favoriteBtn.textContent = '☆';
                 }
 
                 let index = favoriteMovies.indexOf(movieId);
@@ -134,29 +140,22 @@ export async function favoriteToggle(movieId) {
     });
 }
 
+export async function displayFavoriteMovies() {
+    console.log('Kaller displayFavoriteMovies'); // Bekreft at funksjonen kalles
+    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
+    console.log('Favorittfilmer hentet fra localStorage:', favoriteMovies); // Sjekk innholdet
+
+    for (let imdbID of favoriteMovies) {
+        let movieDetails = await favoriteMoviesInfo(imdbID);
+        console.log('Filmdetaljer hentet:', movieDetails); // Logg detaljene
+
+        if (movieDetails) {
+            let movieCard = createMovieCard(movieDetails);
+            console.log('Film kort opprettet:', movieCard); // Logg kortet
+
+            displayMovieCard(movieCard);
+        }
+    }
+}
+
 //anrope / getItem'favoriteMovies' senere i en annen mappe, når jeg er på favoritt.html siden!!!! ELLERS VIL IKKE TOGGLE FUNKSJONEN FUNGERE
-
-
-
-// 1) OPPDATERE textContent med tom/fylt stjerne etter hvert klikk
-// 2) LAGRE filmen i LocalStorage om den er en favoritt (textContent === gul stjerne)
-// 3) TA BORT filmen fra localStorage om filmen ikke er favoritt lengre? (textContent === ufylt stjerne)
-
-// 4) STYLE ellre bruke D-NONE til toggling?
-// 5) BOOLEAN for å sjekke om stjernen er TRUE eller FALSE elns
-
-
-// HUSK Å IMPORTERE / SJEKK OM DET TRENGS AWAIT osv...
-
-export function addToFavorites () {
- // 'click' på tom stjerne --> blir gul stjerne (anrop favoriteToggle funksjon) 
- // legger film til favorittsiden
-}
-
-export function removeFromFavorites () {
-    // 'click' på fylt stjerne --> blir tom stjerne (anrop favoriteToggle funksjon)
-    // tar film bort fra favorittside
-}
-
-// må kanskje ha en displayFavoriteCard funksjon, om jeg bruker displayCard funksjonen så blir det kanskje bare rot?
-// SJEKK HVA AIZO SYNTES OM PLANENE MINE.

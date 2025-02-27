@@ -212,6 +212,17 @@ body {
 }
 
 
+
+
+
+
+
+.favorites-title {
+    color:white;
+    font-family: Montserrat;
+}
+
+
 @media (max-width: 768px) {
 
     .header__fav-btn {
