@@ -198,9 +198,13 @@ body {
 }
 
 .favorite-btn {
-    /* background-color: transparent; */
+    background-color: transparent;
     border: none;
-    background-color: red;
+    color: yellow;
+    top: -484px;
+    left: 100px;
+    border-radius: 0 0 .3rem .3rem;
+    background-color: var(--text-yellow);
     font-size: 5rem;
     cursor: pointer;
     z-index: 999;
