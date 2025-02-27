@@ -34,9 +34,9 @@ export function createMovieCard(movie) {
         localStorage.setItem('movieDetails', JSON.stringify(movieDetails));
         window.location.href = `/template/movie.html?i=${movie.imdbID}`; 
     });
-    favoriteToggle(movie.imdbID, card);
-    console.error(favoriteToggle);
+    
     displayMovieCard(card); 
+    favoriteToggle(movie.imdbID);
     return card;
 }
 

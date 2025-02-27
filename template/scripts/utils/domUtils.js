@@ -99,7 +99,7 @@ export async function displayDetailedCard () {
 let favoriteMovies = [];
 
 export async function favoriteToggle(movieId) {
-    let images = document.querySelectorAll('.movie-img');
+    let images = document.querySelectorAll('.card-container__movie');
 
     images.forEach((movieImg) => { // For hvert bildeelement så;
         if (!movieImg.querySelector('.favorite-btn')) { // Sjekk om knappen allerede finnes // ellers blir det 14 knapper i hvert bilde når det finnes 14 bilder på siden...
@@ -133,7 +133,7 @@ export async function favoriteToggle(movieId) {
     });
 }
 
-//anrope / getItem'favoriteMovies' senere i en annen mappe, når jeg er på favoritt.html siden
+//anrope / getItem'favoriteMovies' senere i en annen mappe, når jeg er på favoritt.html siden!!!! ELLERS VIL IKKE TOGGLE FUNKSJONEN FUNGERE
 
 
 

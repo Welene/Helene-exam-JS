@@ -200,7 +200,7 @@ body {
 .favorite-btn {
     /* background-color: transparent; */
     border: none;
-    color: red;
+    background-color: red;
     font-size: 5rem;
     cursor: pointer;
     z-index: 999;
