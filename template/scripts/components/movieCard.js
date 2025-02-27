@@ -1,24 +1,28 @@
 import { displayMovieCard } from '../utils/domUtils.js';
 import { displayDetailedCard } from '../utils/domUtils.js';
 import { fetchSpecificMovieDetails } from '../modules/api.js';
+import { favoriteToggle } from '../utils/domUtils.js';
+
+import { displayFavoriteMovies } from '../utils/domUtils.js';
 
 
-window.onload = async function() {
-    const imdbID = new URLSearchParams(window.location.search).get('i');
+// window.onload = async function() {
+//     const imdbID = new URLSearchParams(window.location.search).get('i');
 
-    if (imdbID) {
-        const movieDetails = JSON.parse(localStorage.getItem('movieDetails'));
+//     if (imdbID) {
+//         const movieDetails = JSON.parse(localStorage.getItem('movieDetails'));
 
-        if (movieDetails) {
-            // let detailedCard = await createDetailedCard(movieDetails);
-            const movieInfoSection = document.querySelector('.movie-information');
-            if (movieInfoSection) {
-                console.log('detailedCard.outerHTML:', detailedCard.outerHTML)
-                movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);
-            }
-        }
-    }
-};
+//         if (movieDetails) {
+//             // let detailedCard = await createDetailedCard(movieDetails);
+//             const movieInfoSection = document.querySelector('.movie-information');
+//             if (movieInfoSection) {
+//                 console.log('detailedCard.outerHTML:', detailedCard.outerHTML)
+//                 movieInfoSection.insertAdjacentHTML('beforeend', detailedCard.outerHTML);
+//             }
+//         }
+//     }
+// };
+// JEG TRENGER IKKE ONLOAD FUNKSJONEN I DET HELE TATT? OG JEG BRUKER OUTER.HTML PÅ TO PLASSER, DEN ENE FUNKER OG DENNE GJØR IKKE DET SÅÅÅ... JAH
 
 
 export function createMovieCard(movie) { 
@@ -28,11 +32,13 @@ export function createMovieCard(movie) {
         <img src='${movie.Poster}' alt='${movie.Title}' class='movie-img'> 
         <p class='movie-title'>${movie.Title}</p>`;
     card.addEventListener('click', async () => {
-        const movieDetails = await fetchSpecificMovieDetails(movie.imdbID); // plot kommer ikke med, er title x2
+        const movieDetails = await fetchSpecificMovieDetails(movie.imdbID);
         localStorage.setItem('movieDetails', JSON.stringify(movieDetails));
         window.location.href = `/template/movie.html?i=${movie.imdbID}`; 
     });
+    
     displayMovieCard(card); 
+    favoriteToggle(movie.imdbID);
     return card;
 }
 
@@ -47,16 +53,5 @@ export async function createDetailedCard (movie) {
     console.log('detailedCard AKA the article with all movie info content:', detailedCard); // LOGGER UT ARTIKKELEN, DER INFO SKAL LIGGE - MEN LIKEVEL ER DEN UNDEFINED I domUtils??? // logger x2 for some reason
     return detailedCard;  
 } 
-
-
-export function toggleFavorite() {
-// HER LEGGER JEG TIL ET TOMT OG ET FYLT STJERNEIKON SOM JEG KAN TOGGLE AV OG PÅ I BILDET,
-// DE HAVNER INN OG UT AV FAVORITES.HTML/SIDEN NÅR MAN TOGGLER. 
-
-// STYLING/PLASSERING AV STJERNE-IKONET PÅ BILDET GJØR JEG I CSS SENERE.
-
-}
-
-
 
 

@@ -197,7 +197,30 @@ body {
     letter-spacing: .5px;
 }
 
+.favorite-btn {
+    background-color: transparent;
+    border: none;
+    color: yellow;
+    top: -484px;
+    left: 100px;
+    border-radius: 0 0 .3rem .3rem;
+    background-color: var(--text-yellow);
+    font-size: 5rem;
+    cursor: pointer;
+    z-index: 999;
+    position: relative;
+}
 
+
+
+
+
+
+
+.favorites-title {
+    color:white;
+    font-family: Montserrat;
+}
 
 
 @media (max-width: 768px) {
