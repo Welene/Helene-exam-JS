@@ -282,12 +282,27 @@ article:hover {
     }
 
     .header__form {
-        top: 31%;
-        height: 2rem;
+        position: relative; 
+        top: 100px;  
+        width: 100%;  
+        margin-top: 1rem;  
+        display: flex; 
+        justify-content: center;
+    }
+
+    .header__input {
+        width: 15rem; 
+        padding: 0.8rem;
+        border-radius: 2rem 0rem 0rem 2rem;
+        border: none;
     }
 
     .header__form-btn {
-        width: 3rem;
+        width: 5rem;
+    }
+
+    .header__search-icon {
+        margin: 0rem 1rem;
     }
 
     .card-container {
@@ -340,15 +355,7 @@ article:hover {
         width: 2rem;
         margin-left: 3rem;
     }
-
-    /* .header__fav-btn {
-        display: none; 
-    }
-
-    .header__fav-icon {
-        display: block; 
-    } */
-
+    
     #favBtnIcon {
         display: block;
     }
@@ -356,8 +363,8 @@ article:hover {
     #favBtn {
         display: none;
     }
-
 }
+
 
 
     /* .detailed-info {
