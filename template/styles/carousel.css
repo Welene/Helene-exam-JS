@@ -3,6 +3,7 @@
 .trailers {
     overflow: hidden;
     position: relative;
+    margin-top: 3rem;
 }
 
 .trailers__arrow {
