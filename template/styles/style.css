@@ -111,8 +111,7 @@ body {
 }
 
 
-/* MIN EGEN STYLING HER */
-
+/* ALL MOVIE CARDS */
 .card-container {
     margin-top: 7rem;
     display: grid;
@@ -127,30 +126,15 @@ article:hover {
     transition: transform 0.2s ease-in-out; 
 } 
 
-
+/* RECOMMENDED INDEX MOVIES TITLE */
 .popular-title {
     color: white;
     text-align: center;
     font-weight: bold;
     font-family: Montserrat;
 }
-/* legg en klasse på film-p-taggen i js, sånn at den skal styles, den er der men seres ikke, fordi det er svart skrift */
 
-/* legge til en src dynamisk på alle film-bilder, sånn at når man trykker på det, så blir det et mer spesifikt (=i) søk og man havner på movie-info siden om den spesifikke filmen */
-
-
-
-
-/* .li-container { */
-    /* div boksen for li-elementene som skal dukke opp som searchSuggestion text under */
-    /* height: 3rem;
-    width: 5rem;
-    background-color: red;
-    z-index: 999;
-} */
-
-
-/* p teksten under hvert film-bilde fra Jespers API */
+/* MOVIE CARD - TITLE OF MOVIE */
 .movie-title {
     font-family: Montserrat;
     font-weight: 600;
@@ -159,10 +143,8 @@ article:hover {
     margin-top: 1rem;
 }
 
-/* legg på margin-bottom/space under de siste bildene, eller en footer eller hva som helst */
 
-
-/* hvert eneste filmbilde fra Jespers API */
+/* MOVIE CARD -- MOVIE IMAGE */
 .movie-img {
     height: 445px;
     width: 300px;
@@ -170,9 +152,7 @@ article:hover {
     box-shadow: 0px 0px 15px 2px rgb(201, 201, 201);
 }
 
-
-
-
+/* ---------------------------------------------------------------------------- DETAILS ABOUT MOVIE PAGE */
 
 /* DETAILED MOVIE CARD SECTION */
 .movie-information {
@@ -240,7 +220,7 @@ article:hover {
     padding: 1.5rem .3rem 1.5rem .3rem;
 }
 
-
+/* ---------------------------------------------------------------------------- YOUR FAVORITE MOVIES PAGE */
 .card-container-fav {
     margin-top: 7rem;
     display: grid;
