@@ -3,6 +3,7 @@ import { fetchSpecificMovieDetails } from '../modules/api.js';
 import { createDetailedCard } from "../components/movieCard.js";
 
 import { createMovieCard } from "../components/movieCard.js";
+import { favoriteMoviesInfo } from "../modules/api.js";
 
 export async function searchFunction() {
     let searchBtn = document.getElementById('searchBtn');
@@ -141,6 +142,7 @@ export async function favoriteToggle(movieId) {
 }
 
 export async function displayFavoriteMovies() {
+    console.log('🔍 Kaller displayFavoriteMovies()');
     console.log('Kaller displayFavoriteMovies'); // Bekreft at funksjonen kalles
     const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
     console.log('Favorittfilmer hentet fra localStorage:', favoriteMovies); // Sjekk innholdet
@@ -158,4 +160,10 @@ export async function displayFavoriteMovies() {
     }
 }
 
+if (window.location.pathname === "/template/favorites.html") {
+    console.log("⭐ Du er på favorittsiden! Kjører displayFavoriteMovies...");
+    displayFavoriteMovies();
+} else {
+    console.log("🚫 Ikke på favorittsiden, kjører ikke favoritt-funksjonen.");
+}
 //anrope / getItem'favoriteMovies' senere i en annen mappe, når jeg er på favoritt.html siden!!!! ELLERS VIL IKKE TOGGLE FUNKSJONEN FUNGERE

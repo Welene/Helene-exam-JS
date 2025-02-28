@@ -1,6 +1,5 @@
 import { oData } from '../data/data.js';
 
-import { displayMovieCard } from '../utils/domUtils.js';
 
 
 export async function fetchTopMovies() {

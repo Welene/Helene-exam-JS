@@ -97,3 +97,5 @@ displaySearchMovies(); // husker å anrope displaySearchMovies funksjonen som je
 // DELE OPP TING SENERE SÅNN AT SCRIPT.JS BARE ANROPER OG IKKE LAGER SELVE FUNKSJONENE
 
 displayDetailedCard();
+
+console.log(localStorage.getItem('favoriteMovies'));
