@@ -1,2 +1,2 @@
 Responivity works perfectly when opening inspect again? but not when sliding? but when refreshing it is perfect? I am so confused??? I don't know what going onnnnnnnnnn imsodonewiththisIcantanymore
-![GIF Description](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmakeagif.com%2Fgif%2Fterminator-2-judgement-day-thumbs-up-uxctJP&psig=AOvVaw1OdEylaTbsAnQoGrXhVapi&ust=1740867201889000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCMi5lfix54sDFQAAAAAdAAAAABAR)
+![GIF Description](assets/gif.gif)
