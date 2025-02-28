@@ -10,6 +10,7 @@ import { createMovieCard } from './components/movieCard.js';
 import { displayMovieCard } from './utils/domUtils.js';
 import { oData } from './data/data.js';
 import { displayDetailedCard } from './utils/domUtils.js';
+import { displayFavoriteMovies } from './utils/domUtils.js';
 
 
 if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
@@ -90,6 +91,10 @@ export async function displaySearchMovies() {
     }
 }
 
+if (window.location.pathname === "/template/favorites.html" && !window.hasLoadedFavorites) {
+    displayFavoriteMovies();  // anroper bare når vi er på favorites.html siden
+    // window.hasLoadedFavorites = true;  // anroper ikke funksjonen på nytt
+}
 
 displaySearchMovies(); // husker å anrope displaySearchMovies funksjonen som jeg akkurat skrev ovenfor, ellers funker det jo ikke...
 

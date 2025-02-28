@@ -141,29 +141,25 @@ export async function favoriteToggle(movieId) {
     });
 }
 
-export async function displayFavoriteMovies() {
-    console.log('🔍 Kaller displayFavoriteMovies()');
-    console.log('Kaller displayFavoriteMovies'); // Bekreft at funksjonen kalles
-    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
-    console.log('Favorittfilmer hentet fra localStorage:', favoriteMovies); // Sjekk innholdet
 
+
+export async function displayFavoriteMovies() {
+    if (window.location.pathname !== "/template/favorites.html") {
+        return; // kjører ikke funksjonen om vi ikke er på favorites.html siden
+    }
+    let favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
     for (let imdbID of favoriteMovies) {
         let movieDetails = await favoriteMoviesInfo(imdbID);
-        console.log('Filmdetaljer hentet:', movieDetails); // Logg detaljene
-
         if (movieDetails) {
             let movieCard = createMovieCard(movieDetails);
-            console.log('Film kort opprettet:', movieCard); // Logg kortet
-
             displayMovieCard(movieCard);
         }
     }
 }
 
-if (window.location.pathname === "/template/favorites.html") {
-    console.log("⭐ Du er på favorittsiden! Kjører displayFavoriteMovies...");
-    displayFavoriteMovies();
-} else {
-    console.log("🚫 Ikke på favorittsiden, kjører ikke favoritt-funksjonen.");
-}
+
+
+
+
+
 //anrope / getItem'favoriteMovies' senere i en annen mappe, når jeg er på favoritt.html siden!!!! ELLERS VIL IKKE TOGGLE FUNKSJONEN FUNGERE
