@@ -109,20 +109,25 @@ export async function favoriteToggle(movieId) {
             let favoriteBtn = document.createElement('button');
             favoriteBtn.classList.add('favorite-btn');
             // favoriteBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=87&format=png&color=000000" alt="Tom stjerne">';// som er tom til å begynne med / ikke favoritt-markert
-            favoriteBtn.textContent = '☆';
+            favoriteBtn.textContent = '🖤';
+
+            let favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || []; // sjekker localstorage om filmen ALLEREDE er en fav...
+            if (favoriteMovies.includes(movieId)) {
+                favoriteBtn.textContent = '❤️'; // om filmen er i localstorage/favoritter -- fylt stjerne
+            }
 
             favoriteBtn.addEventListener('click', (event) => {
                 event.preventDefault(); // unngår at siden refresher når man trykker på knappen, fordi favoriteBtn er jo en knapp
                 event.stopPropagation(); // når man trykker på stjernen, så bytter den ikke side -- SOMEHOW
 
                 // Bytt ikon
-                if (favoriteBtn.textContent==='☆') { // stjernen er tom først, INKLUDERER alt teksten for å sjekke om det er samme som tom stjerne-ikonet
+                if (favoriteBtn.textContent==='🖤') { // stjernen er tom først, INKLUDERER alt teksten for å sjekke om det er samme som tom stjerne-ikonet
                     // if (favoriteBtn.innerHTML.includes('Tom stjerne')) { // trengs bare med innerHTML animert ikon...
                     // favoriteBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=lFyaayFdhpED&format=png&color=000000" alt="Fylt stjerne">'; // om man klikker så blir den gul
-                    favoriteBtn.textContent = '★';
+                    favoriteBtn.textContent = '❤️';
                 } else {
                     // favoriteBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=87&format=png&color=000000" alt="Tom stjerne">'  // om den er gul allerede så blir den tom igjen??????????????????????????????????????????????????? usikkerok hmm
-                    favoriteBtn.textContent = '☆';
+                    favoriteBtn.textContent = '🖤';
                 }
 
                 let index = favoriteMovies.indexOf(movieId);
