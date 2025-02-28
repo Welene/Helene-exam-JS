@@ -1,11 +1,8 @@
-// import { displayMovieCard } from '../utils/domUtils.js';
 import { searchFunction } from './utils/domUtils.js';
 import { fetchTrailers } from './modules/api.js';
 import { renderTrailers } from './modules/caroussel.js';
-
 import { fetchTopMovies } from './modules/api.js';
 import { fetchMovies } from './modules/api.js';
-
 import { createMovieCard } from './components/movieCard.js';
 import { displayMovieCard } from './utils/domUtils.js';
 import { oData } from './data/data.js';
@@ -13,27 +10,12 @@ import { displayDetailedCard } from './utils/domUtils.js';
 import { displayFavoriteMovies } from './utils/domUtils.js';
 
 
-if (window.location.pathname === '/' || window.location.pathname === '/template/index.html') {
-    console.log('index.html');
-
-} else if(window.location.pathname === '/template/favorites.html') {
-    console.log('favorites.html');
-
-} else if(window.location.pathname === '/template/movie.html') {
-    console.log('movie.html');
-
-} else if(window.location.pathname === '/template/search.html') {
-    console.log('search.html');
-
-}
-
-searchFunction(); // anroper searchFunction, som anroper fetchMovies inni seg, så den anroper begge da, NÅR MAN TRYKKER på search altså så kjører funksjonen som er i domUtils.js
+searchFunction(); 
 
 
-// denne passer tydeligvis å ha her i script.js
 export async function getFetchTrailers() {
     try {
-        if (window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') { // om jeg ikke er på index.html, får jeg ikke errorMsg av at trailere ikke vises, de skal ikke vises på search siden
+        if (window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') {
             const allTrailers = await fetchTrailers();
             let randomTrailers = allTrailers.sort(() => Math.random() - 0.5).slice(0, 5); 
 
@@ -46,15 +28,13 @@ export async function getFetchTrailers() {
     }
 } 
 
-
 getFetchTrailers();
 
 
 async function displayTopMovies() {
     if (window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') {
-        await fetchTopMovies();  // Henter filmer fra API-et og lagrer dem i oData.topMovieList
-        const movies = oData.topMovieList;  // Få tilgang til listen med filmer
-        // For hver film, lager et kort og viser det
+        await fetchTopMovies(); 
+        const movies = oData.topMovieList;  
         movies.slice(0, 15).forEach(movie => {
         const card = createMovieCard(movie);  
         displayMovieCard(card);  
@@ -62,44 +42,34 @@ async function displayTopMovies() {
     }  
 }
 
-
 displayTopMovies();
 
 
 export async function displaySearchMovies() {
-    if (window.location.pathname === '/template/search.html') { // sjekker om vi er på SEARCH siden i stedet for;
+    if (window.location.pathname === '/template/search.html') { 
+        let queryString = window.location.search; 
+        const userInput = queryString.split('=')[1];
 
-        let queryString = window.location.search; // i stedet for å bruke new URLSearchParams (til objekt, om man har flere parametrer) (..)
-        // (...)jeg har bare ett "userInput" og da kan vi bare skrive sånn her
-        const userInput = queryString.split('=')[1]; // vi kutter URL-en og henter bare teksten etter = [1] alt etter =... 
-        // [0] f.eks hadde hentet alt FØR = tegnet. Vi vil ha alt etter =, AKA [1].
+        if (userInput) { 
+            let allMovies = await fetchMovies(userInput); 
 
-        if (userInput) { // sjekker om vi ahr et userInput, om vi har det så;
-            let allMovies = await fetchMovies(userInput); // venter vi på svar fra fetchMovies(userInput), AKA det du har søkt etter
-            console.log('Filmer hentet for søket:', allMovies);
-
-            if (allMovies.Response === "True" && allMovies.Search) { // om søket er godkjent og får en respons 
-                // og .Search = om det finnes filmer som er relatert til userInput
-                allMovies.Search.slice(0, 9).forEach(movie => { // da går den gjennom alle filmer i arrayen med alt som er relevant til userInput
-                    const card = createMovieCard(movie); // lager et movieCard sånn at disse relevante filmene kan vises på skjermen
-                    displayMovieCard(card); // og vi viser dem faktisk ved å anrope displayMovieCard funksjonen.
+            if (allMovies.Response === "True" && allMovies.Search) {
+                allMovies.Search.slice(0, 9).forEach(movie => { 
+                    const card = createMovieCard(movie); 
+                    displayMovieCard(card); 
                 });
             } else {
-                console.log('Disse filmene ser du på skjermen', allMovies); // logger ut alle filmene som dukker opp relatert til userInput
+                console.log('Disse filmene ser du på skjermen', allMovies);
             }
         }
     }
 }
 
 if (window.location.pathname === "/template/favorites.html" && !window.hasLoadedFavorites) {
-    displayFavoriteMovies();  // anroper bare når vi er på favorites.html siden
-    // window.hasLoadedFavorites = true;  // anroper ikke funksjonen på nytt
+    displayFavoriteMovies();
 }
 
-displaySearchMovies(); // husker å anrope displaySearchMovies funksjonen som jeg akkurat skrev ovenfor, ellers funker det jo ikke...
-
-
-// DELE OPP TING SENERE SÅNN AT SCRIPT.JS BARE ANROPER OG IKKE LAGER SELVE FUNKSJONENE
+displaySearchMovies();
 
 displayDetailedCard();
 
