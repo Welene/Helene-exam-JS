@@ -111,6 +111,11 @@ export async function favoriteToggle(movieId) {
             // favoriteBtn.innerHTML = '<img src="https://img.icons8.com/?size=100&id=87&format=png&color=000000" alt="Tom stjerne">';// som er tom til å begynne med / ikke favoritt-markert
             favoriteBtn.textContent = '☆';
 
+            let favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || []; // sjekker localstorage om filmen ALLEREDE er en fav...
+            if (favoriteMovies.includes(movieId)) {
+                favoriteBtn.textContent = '★'; // om filmen er i localstorage/favoritter -- fylt stjerne
+            }
+
             favoriteBtn.addEventListener('click', (event) => {
                 event.preventDefault(); // unngår at siden refresher når man trykker på knappen, fordi favoriteBtn er jo en knapp
                 event.stopPropagation(); // når man trykker på stjernen, så bytter den ikke side -- SOMEHOW
