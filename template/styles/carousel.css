@@ -14,11 +14,14 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    transition: transform 0.2s ease-in-out; 
 }
 
 .trailers__arrow:hover,
 .trailers__arrow:active {
     filter: invert(25%);
+    transform: scale(1.2) translateY(-50%);
+    transform-origin: center; 
 }
 
 .trailers__arrow--right {
@@ -75,6 +78,12 @@
 .trailers__video-1 {
     left: 15%;
     opacity: .4;
+}
+
+.trailers__video-3:hover {
+    transform: translateX(-50%) scale(1.1);
+    transition: transform 0.2s ease-in-out; 
+    transform-origin: center; 
 }
 
 .trailers__video-2,
